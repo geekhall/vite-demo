@@ -7,7 +7,7 @@ const router = useRouter()
 export function request(config: AxiosRequestConfig) {
     // 1 创建实例
     const instance = axios.create({
-        baseURL: "xxx",
+        baseURL: "api",
         timeout: 5000,
         headers: {
             "Content-Type": "application/json",

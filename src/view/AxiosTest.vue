@@ -4,12 +4,12 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { getUserInfo } from "../service/api/user";
+import { getList } from "../service/api/user";
 
 export default defineComponent({
   setup() {
     const test = async () => {
-      await getUserInfo().then((res: any) => {
+      await getList().then((res: any) => {
         console.log(res.data);
       });
     };

@@ -642,3 +642,44 @@ const routes = [
 
 点击测试按钮后可以看到控制台向`http://localhost:3000/xxx/element-test`发送了请求。
 
+## 安装Moke工具
+
+mock 模拟数据我们选用 `mockjs` 插件，vite 中需要安装 `vite-plugin-mock` 插件。
+
+### 安装
+
+```bash
+yarn add mockjs
+yarn add vite-plugin-mock -D
+```
+
+### 在配置文件中引用插件
+
+```typescript
+import { viteMockServe } from 'vite-plugin-mock' //++
+
+plugins: [
+    viteMockServe({ supportTs: true }), // ++
+]
+```
+
+### 使用Mock
+
+在src下新建mock文件夹，新建`index.ts`文件，添加如下内容：
+
+```typescript
+import { MockMethod } from 'vite-plugin-mock'
+export default [
+  {
+    url: '/api/getList',
+    method: 'get',
+    response: () => {
+      return {
+          code: 0,
+          message: 'ok',
+          data: ['aa', 'bb']
+      }
+    }
+  },
+] as MockMethod[]
+```
