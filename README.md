@@ -33,20 +33,6 @@ yarn
 yarn dev
 ```
 
-## add vue-router
-
-```bash
-yarn add vue-router@next
-# or
-yarn add vue-router@4
-```
-
-## add vuex
-
-```bash
-yarn add vuex@next
-```
-
 ## 修改vite.config.ts
 
 ```typescript
@@ -163,3 +149,164 @@ table {
 
 
 ```
+
+## add vuex
+
+```bash
+# 安装vuex，使用4.x版本
+yarn add vuex@next --save
+```
+在src目录下创建`store/modules`目录，用于新建各个`moudle`，如`users.ts`：
+```typescript
+import { createStore } from "vuex";
+
+export interface State { }
+
+export const users = createStore<State>({
+    state: () => ({}),
+    getters: {},
+    mutations: {},
+    actions: {},
+})
+```
+
+在 src 目录下创建 store/index.ts，添加如下内容：
+
+```typescript
+import { InjectionKey } from "vue";
+import { createStore, useStore as baseUseStore, Store } from "vuex";
+import type { App } from "vue";
+
+// 引入对应的模块
+import { users } from "./modules/users";
+
+// 手动声明 state 类型
+export interface State { }
+
+// 定义注入类型
+const key: InjectionKey<Store<State>> = Symbol();
+
+const store = createStore<State>({
+  state() { },
+  mutations: {},
+  actions: {},
+  // 使用模块
+  modules: { users },
+});
+
+// 将类型注入useStore，项目中引用的均为自定义的这个，覆盖了vuex提供的useStore
+export function useStore() {
+  return baseUseStore(key);
+}
+
+export function setupStore(app: App<Element>) {
+  app.use(store, key);
+}
+
+export default store;
+
+```
+
+在`main.ts`中添加：
+```typescript
+import { createApp } from 'vue'
+import { setupStore } from './store'
+import App from './App.vue'
+
+const app = createApp(App);
+setupStore(app);
+app.mount('#app');
+```
+## add vue-router
+
+```bash
+yarn add vue-router@next
+# or
+yarn add vue-router@4
+```
+功能包括：
+* 嵌套路由映射
+* 动态路由选择
+* 模块化、基于组件的路由配置
+* 路由参数、查询、通配符
+* 展示由 Vue.js 的过渡系统提供的过渡效果
+* 细致的导航控制
+* 自动激活 CSS 类的链接
+* HTML5 history 模式或 hash 模式
+* 可定制的滚动行为
+* URL 的正确编码
+
+在`src`下新建`view`文件夹，添加`Home.vue`，和`Login.vue`：
+
+* Home.vue
+```vue
+<template>
+    <div>
+        <h1>Home Page.</h1>
+    </div>
+</template>
+
+<script lang="ts">
+
+</script>
+
+<style lang="less" scoped>
+</style>
+```
+
+* Login.vue
+
+```vue
+<template>
+    <div>
+        <h1>Login Page.</h1>
+    </div>
+</template>
+
+<script lang="ts">
+
+</script>
+
+<style lang="less" scoped>
+</style>
+
+```
+
+
+
+修改`App.vue`，加上 `router-view` 标签作为路由占位符才会起作用
+
+```vue
+<template>
+  <router-view></router-view>
+</template>
+
+<script lang="ts">
+export default {
+  name: "App",
+};
+</script>
+
+<style lang="less" scoped>
+</style>
+```
+
+修改`main.ts`:
+
+```typescript
+import { createApp } from "vue";
+import { setupStore } from "./store";
+import router, { setupRouter } from "./router";
+import App from "./App.vue";
+
+const app = createApp(App);
+
+setupRouter(app);
+setupStore(app);
+
+router.isReady().then(() => {
+  app.mount("#app");
+});
+
+```
+
