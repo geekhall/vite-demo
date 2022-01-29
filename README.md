@@ -83,3 +83,83 @@ yarn add @types/node --save-dev
 ```
 
 
+## 清理默认生成的工程
+
+新建`public/css/reset.css`，添加如下内容，并在main.ts添加`import '../public/css/reset.css'`引入：
+```css
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+```
+
+新建vscode全局Snippet代码块
+```json
+{
+  "Print to console": {
+    "prefix": "vue-ts-less",
+    "body": [
+      "<template></template>",
+      "",
+      "<script lang=\"ts\">",
+      "import { defineComponent } from \"vue\";",
+      "export default defineComponent({",
+      "  components: {},",
+      "  setup() {",
+      "    return {};",
+      "  },",
+      "});",
+      "</script>",
+      "",
+      "<style lang=\"less\" scoped>",
+      "</style>",
+      "$2"
+    ],
+    "description": "Vue-ts-less模板"
+  }
+}
+将 `src/assets` 和 `src/components`目录下的所有文件都删除。
+
+清空`App.vue`，并使用`vue-ts-less`生成新的内容后保存。
+
+
+```
