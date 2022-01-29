@@ -33,3 +33,16 @@ yarn
 yarn dev
 ```
 
+## add vue-router
+
+```bash
+yarn add vue-router@next
+# or
+yarn add vue-router@4
+```
+
+## add vuex
+
+```bash
+yarn add vuex@next
+```
