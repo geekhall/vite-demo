@@ -321,6 +321,46 @@ router.isReady().then(() => {
 ```bash
 
 ```
+
+### 在`main.ts`完整引入（不推荐）
+
+```typescript
+import { createApp } from 'vue';
+import Antd from 'ant-design-vue';
+import App from './App';
+import 'ant-design-vue/dist/antd.css'; // 要引入才有样式
+
+const app = createApp();
+app.config.productionTip = false;
+
+app.use(Antd);
+```
+
+### 局部导入
+
+```typescript
+import { createApp } from 'vue';
+import { Button } from 'ant-design-vue';
+import 'ant-design-vue/es/button/style'; //同样要引入less样式
+import "ant-design-vue/es/button/style/css"; // 加载 CSS
+
+import App from './App';
+
+const app = createApp(App);
+
+app.use(Button).mount('#app');
+```
+
+### 按需导入（推荐）
+
+* 安装vite-plugin-imp
+
+```bash
+# -D / --dev 指开发依赖，会加到package.json的devDependencies中
+yarn add vite-plugin-imp -D
+```
+
+
 ## 添加element plus支持
 
 ### 安装

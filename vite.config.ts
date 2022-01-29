@@ -7,7 +7,8 @@ import path from "path";
 const resolve = (dir: string) => path.join(__dirname, dir);
 
 export default defineConfig({
-  plugins: [vue(),
+  plugins: [
+    vue(),
     // ...
     AutoImport({
       resolvers: [ElementPlusResolver()],
