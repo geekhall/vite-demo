@@ -888,7 +888,7 @@ vscode-vue-languageservice@0.29.8:
     vscode-pug-languageservice "0.29.8"
     vscode-typescript-languageservice "0.29.8"
 
-vue-router@4:
+vue-router@^4.0.12:
   version "4.0.12"
   resolved "https://registry.npmmirror.com/vue-router/download/vue-router-4.0.12.tgz#8dc792cddf5bb1abcc3908f9064136de7e13c460"
   integrity sha512-CPXvfqe+mZLB1kBWssssTiWg4EQERyqJZes7USiqfW9B5N2x+nHlnsM1D3b5CaJ6qgCvMmYJnz+G0iWjNCvXrg==
