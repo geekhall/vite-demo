@@ -1,7 +1,7 @@
 # Vue 3 + Typescript + Vite
 
 _Read this in other languages:_
-[_English_](README.en-US.md)
+[_简体中文_](README.md)
 
 This template should help get you started developing with Vue 3 and Typescript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
 
@@ -13,7 +13,7 @@ This template should help get you started developing with Vue 3 and Typescript i
 
 Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's `.vue` type support plugin by running `Volar: Switch TS Plugin on/off` from VSCode command palette.
 
-## 创建工程
+## Create project
 
 ```bash
 npm init vite vite-demo -- --template vue-ts
@@ -21,24 +21,16 @@ npm init vite vite-demo -- --template vue-ts
 yarn create vite vite-demo --template vue-ts
 ```
 
-## 添加`vue-router`路由功能
+## Add vue-router
 
-### 安装
-
+### install
 ```bash
 npm install vue-router@4
 # or
 yarn add vue-router@4
 ```
 
-## run
-
-```bash
-yarn
-yarn dev
-```
-
-## 修改vite.config.ts
+### modify vite.config.ts
 
 ```typescript
 import { defineConfig } from 'vite'
@@ -59,24 +51,25 @@ export default defineConfig({
 
 ```
 
-执行`vite dev`时报错
+Resolve error while executing `vite dev` :
 ```
 failed to load config from /Users/yiny/workspace/vuejs/vite-demo/vite.config.ts
 error when starting dev server:
 TypeError: Cannot read properties of undefined (reading 'join')
 ```
 
-找不到模块“path”或其相应的类型声明；找不到名称“__dirname”
+Could not find module "path"
 
-解决方法：
+Resolve：
+
 ```bash
 yarn add @types/node --save-dev
 ```
 
 
-## 清理默认生成的工程
+## Clean up generated file by default
 
-新建`public/css/reset.css`，添加如下内容，并在main.ts添加`import '../public/css/reset.css'`引入：
+Create file `public/css/reset.css`，and add content：
 ```css
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -122,8 +115,9 @@ table {
 	border-spacing: 0;
 }
 ```
+Add `import '../public/css/reset.css'` to `main.ts`.
 
-新建vscode全局Snippet代码块
+### create vscode global snippet:
 ```json
 {
   "Print to console": {
@@ -148,16 +142,15 @@ table {
     "description": "Vue-ts-less模板"
   }
 }
-将 `src/assets` 和 `src/components`目录下的所有文件都删除。
+delete all files in `src/assets` and `src/components`.
 
-清空`App.vue`，并使用`vue-ts-less`生成新的内容后保存。
-
+delete the content of `App.vue`, type `vue-ts-less` and `tab` key to generate new content.
 
 ```
 
-## 添加 `vuex` 功能
+## Add vuex
 
-### 安装
+### Install
 ```bash
 # 安装vuex，使用4.x版本
 yarn add vuex@next --save
@@ -444,3 +437,14 @@ yarn add sass-loader
 ```
 
 ### 添加主题切换功能
+
+
+
+
+
+## run
+
+```bash
+yarn
+yarn dev
+```
