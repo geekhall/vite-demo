@@ -1,0 +1,9 @@
+/* 改变主题色变量 */
+$--color-primary: #7467F3;
+
+// 与CSS原生变量映射
+#App {
+  --colorText:#606266; // 正常文本
+  --colorTitle:#586573; // 标题
+  --colorSmall:#9CA5AC; // 小号标题
+}

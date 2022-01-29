@@ -315,7 +315,12 @@ router.isReady().then(() => {
 });
 
 ```
+## 添加Ant Design Vue 支持
 
+### 安装
+```bash
+
+```
 ## 添加element plus支持
 
 ### 安装
@@ -443,4 +448,22 @@ yarn add sass-loader
     "sass-loader": "^12.4.0",
 ```
 
-### 添加主题切换功能
+## 添加 axios 功能
+
+`Axios` 是一个基于 `Promise` 的 HTTP 库，
+用于替代Ajax发送`GET`和`POST`请求。
+
+* 可以在浏览器中发送 XMLHttpRequests
+* 可以在 node.js 发送 http 请求
+* 支持 Promise API
+* 拦截请求和响应
+* 转换请求数据和响应数据
+* 能够取消请求
+* 自动转换 JSON 数据
+* 客户端支持保护安全免受 XSRF 攻击
+
+### 安装
+
+```bash
+yarn add axios
+```

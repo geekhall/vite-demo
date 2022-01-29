@@ -13,3 +13,4 @@ setupElem(app);  // ++
 router.isReady().then(() => {
   app.mount("#app");
 });
+

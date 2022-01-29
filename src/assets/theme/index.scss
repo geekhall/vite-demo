@@ -1,0 +1,11 @@
+$--font-path: '~element-plus/lib/theme-chalk/fonts';
+
+.blackT {
+  @import './black.scss';
+  @import "~element-plus/packages/theme-chalk/src/index";
+}
+
+.defaultT {
+  @import './default.scss';
+  @import "~element-plus/packages/theme-chalk/src/index";
+}
