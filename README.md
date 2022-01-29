@@ -46,3 +46,40 @@ yarn add vue-router@4
 ```bash
 yarn add vuex@next
 ```
+
+## 修改vite.config.ts
+
+```typescript
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import path from "path";
+const resolve = (dir: string) => path.join(__dirname, dir);
+
+export default defineConfig({
+  plugins: [vue()],
+  resolve: {
+    alias: {
+      "@/": resolve("src/*"),
+      comps: resolve("src/components"),
+      store: resolve("src/store"),
+    },
+  },
+})
+
+```
+
+执行`vite dev`时报错
+```
+failed to load config from /Users/yiny/workspace/vuejs/vite-demo/vite.config.ts
+error when starting dev server:
+TypeError: Cannot read properties of undefined (reading 'join')
+```
+
+找不到模块“path”或其相应的类型声明；找不到名称“__dirname”
+
+解决方法：
+```bash
+yarn add @types/node --save-dev
+```
+
+
