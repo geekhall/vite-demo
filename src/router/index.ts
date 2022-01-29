@@ -4,11 +4,13 @@ import type { App } from "vue";
 // 导入对应的模块
 const Home = () => import("../view/Home.vue");
 const Login = () => import("../view/Login.vue");
+const Test = () => import("../view/Test.vue");
 
 // 写路由
 const routes = [
   { path: "/", component: Home },
   { path: "/login", component: Login },
+  { path: "/test", component: Test },
 ];
 
 const router = createRouter({

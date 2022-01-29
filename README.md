@@ -310,3 +310,109 @@ router.isReady().then(() => {
 
 ```
 
+## 添加element plus支持
+
+### 安装
+
+```bash
+yarn add element-plus
+```
+
+### 完整导入(不推荐)
+
+如果你对打包后的文件大小不是很在乎，那么使用完整导入会更方便。
+
+```typescript
+// main.ts
+import { createApp } from 'vue'
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
+import App from './App.vue'
+
+const app = createApp(App)
+
+app.use(ElementPlus)
+app.mount('#app')
+```
+### 自动导入（推荐）
+
+首先你需要安装unplugin-vue-components 和 unplugin-auto-import这两款插件
+
+```
+yarn add unplugin-vue-components unplugin-auto-import
+```
+
+版本：
+
+```json
+    "element-plus": "^1.3.0-beta.9",
+    "unplugin-auto-import": "^0.5.11",
+    "unplugin-vue-components": "^0.17.15",
+```
+
+修改`vite.config.ts`：
+
+```typescript
+import { defineConfig } from 'vite'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import vue from '@vitejs/plugin-vue'
+import path from "path";
+const resolve = (dir: string) => path.join(__dirname, dir);
+
+export default defineConfig({
+  plugins: [vue(),
+    // ...
+    AutoImport({
+      resolvers: [ElementPlusResolver()],
+    }),
+    Components({
+      resolvers: [ElementPlusResolver()],
+    }),],
+  resolve: {
+    alias: {
+      "@/": resolve("src/*"),
+      comps: resolve("src/components"),
+      store: resolve("src/store"),
+    },
+  },
+})
+
+```
+
+
+在`src`文件夹下添加`libs/element-plus.ts`，添加如下内容：
+
+```typescript
+import type { App } from "vue";
+import { ElButton } from 'element-plus'
+
+const components = [ElButton];
+
+export function setupElem(app: App<Element>): void {
+    components.forEach((component: any) => {
+      app.use(component);
+    });
+  }
+```
+
+修改main.ts，添加如下内容：
+
+```typescript
+import { createApp } from "vue";
+import { setupStore } from "./store";
+import router, { setupRouter } from "./router";
+import { setupElem } from "./libs/element-plus";  // ++
+import App from "./App.vue";
+
+const app = createApp(App);
+
+setupRouter(app);
+setupStore(app);
+setupElem(app);  // ++
+
+router.isReady().then(() => {
+  app.mount("#app");
+});
+```
