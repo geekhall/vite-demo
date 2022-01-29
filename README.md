@@ -507,3 +507,138 @@ yarn add sass-loader
 ```bash
 yarn add axios
 ```
+
+###
+
+在 `src` 目录下新建 `src/service/request.ts`，添加如下内容，对axios进行二次封装：
+
+```typescript
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import { message } from 'ant-design-vue'
+import { useRouter } from "vue-router"
+
+const router = useRouter()
+
+export function request(config: AxiosRequestConfig) {
+    // 1 创建实例
+    const instance = axios.create({
+        baseURL: "xxx",
+        timeout: 5000,
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+    // 2 拦截器
+    // 请求拦截
+    instance.interceptors.request.use(
+        (config) => {
+            message.loading();
+            return config;
+        },
+        (err) => {
+            console.log(err);
+        }
+    );
+    // 响应拦截
+    instance.interceptors.response.use((response: AxiosResponse<any>) => {
+        message.destroy();
+        return response.data;
+    }),
+        (error: any) => {
+            if (error?.response) {
+                switch (error.response.status) {
+                    case 400: message.error('请求错误(400)'); break;
+                    case 401: router.push({ name: 'login' }); break;
+                    case 403: message.error('拒绝访问(403)'); break;
+                    case 404: message.error('请求出错(404)'); break;
+                    case 408: message.error('请求超时(408)'); break;
+                    case 500: message.error('服务器错误(500)'); break;
+                    case 501: message.error('服务未实现(501)'); break;
+                    case 502: message.error('网络错误(502)'); break;
+                    case 503: message.error('服务不可用(503)'); break;
+                    case 504: message.error('网络超时(504)'); break;
+                    case 505: message.error('HTTP版本不受支持(505)'); break;
+                    default: message.error(`连接出错(${error.response.status})!`);
+                }
+            } else {
+                message.error('连接服务器失败!');
+            }
+            message.destroy();
+            console.log(error);
+        };
+    // 3 返回实例，instance本身就是一个pormise
+    return instance(config);
+}
+
+```
+
+在service文件夹下新建api文件夹，分模块整合api：
+
+```typescript
+import { request } from "../request";
+
+export function getUserInfo() {
+    return request({
+        url: `/element-test`,
+        method: 'get',
+        data: {},
+        params: {}
+    });
+}
+
+
+```
+
+添加`AxiosTest.vue`，并配置router
+
+```vue
+<template>
+  <el-button @click="test">测试</el-button>
+</template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+import { getUserInfo } from "../service/api/user";
+
+export default defineComponent({
+  setup() {
+    const test = async () => {
+      await getUserInfo().then((res: any) => {
+        console.log(res.data);
+      });
+    };
+    return { test };
+  },
+});
+</script>
+
+<style>
+</style>
+
+```
+
+配置`router`:
+
+```typescript
+
+// 导入对应的模块
+const Home = () => import("../view/Home.vue");
+const Login = () => import("../view/Login.vue");
+const ElementTest = () => import("../view/ElementTest.vue");
+const AntTest = () => import("../view/AntTest.vue");
+const AxiosTest = () => import("../view/AxiosTest.vue");
+
+// 写路由
+const routes = [
+  { path: "/", component: Home },
+  { path: "/login", component: Login },
+  { path: "/element-test", component: ElementTest },
+  { path: "/ant-test", component: AntTest },
+  { path: "/axios-test", component: AxiosTest },
+];
+
+```
+访问测试页面URL：`http://localhost:3000/axios-test`
+
+点击测试按钮后可以看到控制台向`http://localhost:3000/xxx/element-test`发送了请求。
+

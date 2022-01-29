@@ -6,6 +6,7 @@ const Home = () => import("../view/Home.vue");
 const Login = () => import("../view/Login.vue");
 const ElementTest = () => import("../view/ElementTest.vue");
 const AntTest = () => import("../view/AntTest.vue");
+const AxiosTest = () => import("../view/AxiosTest.vue");
 
 // 写路由
 const routes = [
@@ -13,6 +14,7 @@ const routes = [
   { path: "/login", component: Login },
   { path: "/element-test", component: ElementTest },
   { path: "/ant-test", component: AntTest },
+  { path: "/axios-test", component: AxiosTest },
 ];
 
 const router = createRouter({
