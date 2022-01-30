@@ -589,7 +589,7 @@ export function getUserInfo() {
 
 ```
 
-添加`AxiosTest.vue`，并配置router
+添加`AxiosTest.vue`，在使用该api的文件中直接引入即可，并配置router
 
 ```vue
 <template>

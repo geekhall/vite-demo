@@ -10,6 +10,7 @@ import Button from 'ant-design-vue/lib/button'; // 按需
 import { setupAntd } from "./libs/antdv";  // ++
 import App from "./App.vue";
 import 'ant-design-vue/dist/antd.css';
+import './assets/css/global.css';
 // Vue.config.productionTip = false;
 
 const app = createApp(App);
