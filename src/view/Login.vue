@@ -33,9 +33,9 @@ export default defineComponent({
         height: 100%;
     }
     #login-form{
-      padding: 1rem;
+      //margin: 1rem;
       .input-group{
-        padding: 1rem 0;
+        margin: 1rem 0;
       }
       .input-group-addon{
         margin-left: 1rem;
