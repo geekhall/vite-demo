@@ -34,10 +34,43 @@
     全名1： <span>{{computedFullName1}}</span><br/>
     <hr/><br/>
     <h2 class="title">监视属性</h2>
-    <h2>今天天气很{{weatherInfo}}</h2>
+    <h2>天气信息</h2>
+    <h2>北京: {{weatherInfo}}</h2>
+    <h2>上海: {{weatherInfo1}}</h2>
+    <h2>东京: {{weatherInfo2}}</h2>
     <button @click="changeWeather">切换天气</button>
-    <hr/>
+    <hr/><br/>
+    <h2>绑定样式</h2>
+    <!-- 绑定变量的写法 ，适用于：样式的类名不确定，需要动态指定-->
+    <div class="basic" :class="bgColor" @click="changeColor">{{name}}</div>
+    <!-- 绑定样式数组写法，适用于要绑定的样式名字和个数都不确定的情况 -->
+    <div class="basic" :class="styles" @click="changeStyle">{{name}}</div>
+    <!-- 绑定样式对象写法，适用于要绑定的样式个数确定，名字也确定的情况，但需要动态决定是否使用 -->
+    <div class="basic" :class="classObj">{{name}}</div>
+    <div class="basic" :style="styleObj">{{name}}</div>
+    <div class="clear"></div>
+    <hr/><br/>
+    <h2>v-if</h2>
+    <p v-if="answer==='A'">A</p>
+    <p v-else-if="answer==='B'">B</p>
+    <p v-else-if="answer==='C'">C</p>
+    <p v-else="answer==='D'">D</p>
 
+    <a-radio-group v-model="radioValue" @change="onChange">
+      <a-radio :style="radioStyle" :radioValue="1">
+        Option A
+      </a-radio>
+      <a-radio :style="radioStyle" :radioValue="2">
+        Option B
+      </a-radio>
+      <a-radio :style="radioStyle" :radioValue="3">
+        Option C
+      </a-radio>
+      <a-radio :style="radioStyle" :radioValue="4">
+        More...
+        <a-input v-if="radioValue === 4" :style="{ width: 100, marginLeft: 10 }" />
+      </a-radio>
+    </a-radio-group>
   </div>
 </template>
 
@@ -57,7 +90,31 @@ export default defineComponent({
       name2: "name2",
       firstName: "",
       lastName: "",
-      isHot: true
+      isHot: true,
+      isHot1: true,
+      isHot2: true,
+      bgColor: ['yellow'],
+      mood:'yellow',
+      styles: ['center', 'big', 'bold'],
+      classObj: {
+        big: true,
+        bold: false,
+        center: true,
+      },
+      styleObj: {
+        // 注意这里使用驼峰法命名，对应css中的font-size属性
+        fontSize: '80px',
+        color: 'red',
+        // 注意这里使用驼峰法命名，对应css中的background-color属性
+        backgroundColor: 'blue'
+      },
+      answer: "B",
+      radioValue: 1,
+      radioStyle: {
+        display: 'block',
+        height: '30px',
+        lineHeight: '30px',
+      },
     }
   },
   methods: {
@@ -75,12 +132,32 @@ export default defineComponent({
       alert(number);
     },
     changeWeather() {
-      this.isHot = !this.isHot
-    }
+      this.isHot = !this.isHot;
+      this.isHot1 = !this.isHot1;
+      this.isHot2 = !this.isHot2;
+    },
+    changeColor(){
+      console.log("change color");
+      const arr = ['yellow', 'green', 'cyan', 'white', 'gray', 'brown']
+      let i = Math.floor(Math.random()*6);
+      this.bgColor = arr[i];
+      console.log(this.bgColor);
+    },
+    changeStyle(){
+      console.log("change style");
+      const arr = ['yellow', 'green', 'cyan']
+      let i = Math.floor(Math.random()*3);
+      // this.bgColor = arr[i];
+      this.styleObj.backgroundColor= arr[i];
+    },
     // showInfo3(number: PointerEvent){
     //   console.log(number);    // 点我弹出提示信息
     //   alert(number);
     // },
+    onChange(e) {
+      console.log('radio checked', e);
+      console.log('radio checked', e.target.value);
+    },
   },
   computed: { // 计算属性
     // 计算属性
@@ -96,7 +173,13 @@ export default defineComponent({
     },
     weatherInfo: function (){
       return this.isHot ? '炎热' : '清爽';
-    }
+    },
+    weatherInfo1: function (){
+      return this.isHot1 ? '炎热' : '清爽';
+    },
+    weatherInfo2: function (){
+      return this.isHot2 ? '炎热' : '清爽';
+    },
   },
   watch: { // 监视属性
     isHot: {
@@ -105,7 +188,15 @@ export default defineComponent({
       handler(newValue, oldValue){
         console.log('isHot被修改了', newValue, oldValue);
       }
-    }
+    },
+    isHot1: {
+      handler(newValue, oldValue) {
+        console.log('isHot1被修改了', newValue, oldValue);
+      }
+    },
+    isHot2(newValue, oldValue) {
+      console.log('isHot2被修改了', newValue, oldValue);
+    },
   }
 })
 </script>
@@ -114,4 +205,32 @@ export default defineComponent({
 .title {
   color: cadetblue;
 }
+.basic{
+  width:300px;
+  height:200px;
+  border: solid green 3px;
+  float: left;
+}
+.cyan{
+  background: cyan;
+}
+.green{
+  background: green;
+}
+.yellow{
+  background:yellow;
+}
+.center{
+  text-align:center;
+  padding-top: 50px;
+}
+.big{
+  font-size:50px;
+}
+.bold{
+  font-weight: bold;
+  color:rebeccapurple;
+}
+.clear{clear:both; height: 0; line-height: 0; font-size: 0}
+
 </style>
