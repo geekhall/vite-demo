@@ -15,6 +15,7 @@
     "less-loader": "^10.2.0",
     "mockjs": "^1.1.0",
     "node-sass": "^7.0.1",
+    "pinia": "^2.0.11",
     "sass": "^1.49.0",
     "sass-loader": "^12.4.0",
     "unplugin-auto-import": "^0.5.11",

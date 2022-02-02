@@ -148,12 +148,11 @@ table {
     "description": "Vue-ts-less模板"
   }
 }
+```
+
 将 `src/assets` 和 `src/components`目录下的所有文件都删除。
 
 清空`App.vue`，并使用`vue-ts-less`生成新的内容后保存。
-
-
-```
 
 ## 添加 `vuex` 功能
 
@@ -223,6 +222,21 @@ const app = createApp(App);
 setupStore(app);
 app.mount('#app');
 ```
+
+
+## 添加 `Pinia` 支持
+
+Pinia可以替代Vuex
+
+### 安装
+
+```bash
+yarn add pinia
+```
+
+
+
+
 ## add vue-router
 
 ```bash

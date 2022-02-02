@@ -10,6 +10,10 @@ const AxiosTest = () => import("../view/AxiosTest.vue");
 const Header = () => import("../view/Header.vue");
 const Test = () => import("../view/Test.vue");
 const RadioButtonSample = () => import("../view/RadioButtonSample.vue");
+const V3Demo = () => import("../view/V3Demo.vue");
+const V3Demo1 = () => import("../view/V3Demo1.vue");
+const V3Demo2 = () => import("../view/V3Demo2.vue");
+const V3Demo3 = () => import("../view/V3Demo3.vue");
 
 // 写路由
 const routes = [
@@ -21,6 +25,10 @@ const routes = [
   { path: "/header", component: Header },
   { path: "/test", component: Test },
   { path: "/radio-button", component: RadioButtonSample },
+  { path: "/v3demo", component: V3Demo },
+  { path: "/v3demo1", component: V3Demo1 },
+  { path: "/v3demo2", component: V3Demo2 },
+  { path: "/v3demo3", component: V3Demo3 },
 ];
 
 const router = createRouter({
