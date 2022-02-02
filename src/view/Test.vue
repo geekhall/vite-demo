@@ -49,28 +49,7 @@
     <div class="basic" :class="classObj">{{name}}</div>
     <div class="basic" :style="styleObj">{{name}}</div>
     <div class="clear"></div>
-    <hr/><br/>
-    <h2>v-if</h2>
-    <p v-if="answer==='A'">A</p>
-    <p v-else-if="answer==='B'">B</p>
-    <p v-else-if="answer==='C'">C</p>
-    <p v-else="answer==='D'">D</p>
 
-    <a-radio-group v-model="radioValue" @change="onChange">
-      <a-radio :style="radioStyle" :radioValue="1">
-        Option A
-      </a-radio>
-      <a-radio :style="radioStyle" :radioValue="2">
-        Option B
-      </a-radio>
-      <a-radio :style="radioStyle" :radioValue="3">
-        Option C
-      </a-radio>
-      <a-radio :style="radioStyle" :radioValue="4">
-        More...
-        <a-input v-if="radioValue === 4" :style="{ width: 100, marginLeft: 10 }" />
-      </a-radio>
-    </a-radio-group>
   </div>
 </template>
 
@@ -109,7 +88,7 @@ export default defineComponent({
         backgroundColor: 'blue'
       },
       answer: "B",
-      radioValue: 1,
+      value: 1,
       radioStyle: {
         display: 'block',
         height: '30px',
@@ -154,10 +133,6 @@ export default defineComponent({
     //   console.log(number);    // 点我弹出提示信息
     //   alert(number);
     // },
-    onChange(e) {
-      console.log('radio checked', e);
-      console.log('radio checked', e.target.value);
-    },
   },
   computed: { // 计算属性
     // 计算属性
