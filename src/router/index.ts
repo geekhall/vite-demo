@@ -14,6 +14,7 @@ const V3Demo = () => import("../view/V3Demo.vue");
 const V3Demo1 = () => import("../view/V3Demo1.vue");
 const V3Demo2 = () => import("../view/V3Demo2.vue");
 const V3Demo3 = () => import("../view/V3Demo3.vue");
+const CartDemo = () => import("../view/ShoppingCartApp.vue");
 
 // 写路由
 const routes = [
@@ -28,7 +29,7 @@ const routes = [
   { path: "/v3demo", component: V3Demo },
   { path: "/v3demo1", component: V3Demo1 },
   { path: "/v3demo2", component: V3Demo2 },
-  { path: "/v3demo3", component: V3Demo3 },
+  { path: "/cart-demo", component: CartDemo },
 ];
 
 const router = createRouter({

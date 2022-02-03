@@ -234,6 +234,22 @@ Pinia可以替代Vuex
 yarn add pinia
 ```
 
+### 使用
+
+在`main.ts`中添加：
+
+```typescript
+// 导入pinia
+import { createPinia } from 'pinia'
+
+// 创建pinia实例
+const pinia = createPinia()
+
+// 挂载pinia
+app.use(pinia)
+
+```
+
 
 
 
@@ -522,7 +538,7 @@ yarn add sass-loader
 yarn add axios
 ```
 
-###
+### 封装
 
 在 `src` 目录下新建 `src/service/request.ts`，添加如下内容，对axios进行二次封装：
 
@@ -668,12 +684,15 @@ yarn add vite-plugin-mock -D
 ```
 
 ### 在配置文件中引用插件
-
+编辑`vite.config.ts`， 添加：
 ```typescript
 import { viteMockServe } from 'vite-plugin-mock' //++
 
 plugins: [
-    viteMockServe({ supportTs: true }), // ++
+    viteMockServe({
+      mockPath: "./src/mock",
+      supportTs: true,
+    }), // MockJS
 ]
 ```
 
@@ -689,11 +708,13 @@ export default [
     method: 'get',
     response: () => {
       return {
-          code: 0,
+          code: 200,
           message: 'ok',
-          data: ['aa', 'bb']
+          data: ['tom', 'jerry']
       }
     }
   },
 ] as MockMethod[]
 ```
+
+使用postman或者浏览器访问：http://localhost:3000/api/getList，即可看到返回结果
