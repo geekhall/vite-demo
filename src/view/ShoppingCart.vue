@@ -5,20 +5,21 @@
             <i>请添加一些商品到购物车</i>
         </p>
         <ul>
-            <li>商品名称 - 商品价格 X 商品数量</li>
-            <li>商品名称 - 商品价格 X 商品数量</li>
-            <li>商品名称 - 商品价格 X 商品数量</li>
+            <li v-for="item in cartStore.cartProducts">{{item.title}} - {{item.price}} X {{item.quantity}}</li>
         </ul>
-        <p>商品总价： xxx</p>
+        <p>商品总价： {{ cartStore.getTotalPrice }}</p>
         <p>
             <button>结算</button>
         </p>
-        <p>结算成功 / 失败。</p>
+        <p v-show="cartStore.checkoutStatus">结算 {{cartStore.checkoutStatus}}。</p>
     </div>
 
 </template>
 
 <script lang="ts" setup>
+
+import { useCartStore } from '../store/cart'
+const cartStore = useCartStore()
 
 </script>
 
