@@ -23,5 +23,5 @@
 </script>
 
 <style lang="less" scoped>
-
+    import { useProductsStore } from '../store/products'
 </style>
