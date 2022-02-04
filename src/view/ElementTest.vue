@@ -50,7 +50,7 @@ import {
 } from '@element-plus/icons-vue'
 </script>
 
-<style>
+<style lang="scss" scoped>
 :root {
   --el-color-primary: #409eff;
   --el-color-success: #67c23a;

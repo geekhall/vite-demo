@@ -768,7 +768,7 @@ Code => 首选项 => 设置 => 搜索vetur，将下面的三个选项勾选掉�
 `commitlint/config-conventional`和`@commitlint/cli`以及`husky`进行强制git代码提交规范检查。
 
 ```bash
-sudo npm install -g commmitizen
+sudo npm install -g commitizen
 yarn add -D commitizen \
   cz-conventional-changelog \
   @commitlint/config-conventional \

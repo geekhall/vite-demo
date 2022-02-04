@@ -1,8 +1,16 @@
 import { defineConfig } from 'vite'
 import vitePluginImp from "vite-plugin-imp"; // ++
+
+// yarn add unplugin-icons
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+
+// yarn add unplugin-element-plus
+import ElementPlus from 'unplugin-element-plus/vite'
+
 import vue from '@vitejs/plugin-vue'
 
 import { viteMockServe } from 'vite-plugin-mock' //++
@@ -13,6 +21,18 @@ const resolve = (dir: string) => path.join(__dirname, dir);
 export default defineConfig({
   plugins: [
     vue(),
+    Components({
+      dts: true,
+      resolvers: [
+        // auto import icons
+        // https://github.com/antfu/vite-plugin-icons
+        IconsResolver({}),
+	      ElementPlusResolver()
+      ]
+    }),
+    // https://github.com/antfu/vite-plugin-icons
+    Icons(),
+    ElementPlus({}),
     styleImport({
       libs: [
         {
