@@ -721,7 +721,7 @@ export default [
 
 
 
-### 安装并使用ESLint和Prettier
+## 安装并使用ESLint和Prettier
 
 ```bash
 # 安装eslint
@@ -758,3 +758,36 @@ idnent: 0,
 Code => 首选项 => 设置 => 搜索vetur，将下面的三个选项勾选掉即可：
 
 ![](https://gitee.com/geekhall/pic/raw/main/img/20220204134200.png)
+
+## 使用Commitizen规范git提交
+
+### 安装依赖
+
+```bash
+sudo npm install -g commmitizen
+yarn add -D commitizen \
+  cz-conventional-changelog \
+  @commitlint/config-conventional \
+  @commitlint/cli \
+  husky \
+  standard-version \
+  cz-customizable
+```
+
+### 配置
+
+1. 在`package.json`中新增：
+
+```json
+"config": {
+  "commitizen": {
+    "path": "node-modules/cz-customizable"
+  }
+}
+```
+
+2. 在根目录新建`.cz-config.js`文件并写入配置，之后就可以使用`git cz` 来代替`git commit`
+
+```
+
+```
