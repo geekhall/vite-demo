@@ -22,6 +22,7 @@ import 'ant-design-vue/dist/antd.css';
 import './assets/css/global.css';
 import './assets/css/index.scss';
 import { createPinia } from 'pinia'
+import svgIcon from './icons/index.vue'
 
 // Vue.config.productionTip = false;
 
@@ -37,6 +38,6 @@ app.use(pinia)        // 挂载Pinia到app
 // app.use(Antd);
 
 router.isReady().then(() => {
-  app.mount("#app");
+  app.component('svg-icon', svgIcon).mount("#app");
 });
 

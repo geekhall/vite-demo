@@ -381,13 +381,29 @@ const app = createApp(App);
 app.use(Button).mount('#app');
 ```
 
-### 按需导入（推荐）
+### 按需导入
 
-* 安装vite-plugin-imp
+* 安装vite-plugin-imp（会报找不到css的问题，暂不使用）
 
 ```bash
 # -D / --dev 指开发依赖，会加到package.json的devDependencies中
 yarn add vite-plugin-imp -D
+```
+
+`vite.config.ts`中添加：
+
+```ts
+import vitePluginImp from "vite-plugin-imp"; // ++
+
+vitePluginImp({
+  libList: [
+    {
+      libName: "ant-design-vue",
+      // style: (name) => `ant-design-vue/es/${name}/style/css`, // 加载css
+      style: (name) => `ant-design-vue/es/${name}/style`, // 加载less
+    },
+  ],
+}),
 ```
 
 
@@ -498,6 +514,40 @@ router.isReady().then(() => {
 });
 ```
 
+### 添加Elementplus icon
+
+```
+yarn add @element-plus/icons-vue
+yarn add unplugin-element-plus
+```
+
+`vite.config.ts` 文件添加：
+
+```ts
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+// yarn add unplugin-element-plus
+import ElementPlus from 'unplugin-element-plus/vite'
+
+plugins: [
+  Components({
+      dts: true,
+      resolvers: [
+        // auto import icons
+        // https://github.com/antfu/vite-plugin-icons
+        IconsResolver({}),
+	      ElementPlusResolver()
+      ]
+    }),
+    // https://github.com/antfu/vite-plugin-icons
+    Icons(),
+    ElementPlus({}),
+    //...
+
+```
+
+这样所有出现过的`element`标签都会自动在`components.d.ts`中去并注册为全局组件
 
 ## less/sass/scss loader
 
@@ -753,6 +803,7 @@ idnent: 0,
 'space-before-function-paren': 0
 ```
 
+然后在 `.vue`或者`.ts`文件中保存时就会使用`Prettier`自动格式化代码了。
 ### 解决VSCode中`.vue`后缀的文件爆红问题
 
 Code => 首选项 => 设置 => 搜索vetur，将下面的三个选项勾选掉即可：
@@ -898,10 +949,51 @@ husky就配置完成了
 
 可以使用`<vue`执行新Vue文件的snippets。
 
+## 添加SVG图标支持
 
-### 添加Elementplus icon
+### 安装
+
+```bash
+yarn add svg-sprite-loader -D
+# or
+npm install svg-sprite-loader -D
+```
+
+
+
+### 添加icons文件夹及相关文件
+
+在`@/src`里面创建`icons`文件夹，里面创建`index.vue`(`svgicon`的模板文件),
+`index.ts`(`svgicon`的`js`逻辑), `svg`文件夹(`svg`图标存放的地址)
+
+这部分需要用到fs模块，所以需要：
+
+```bash
+yarn add fs
+# 或者
+npm install fs
+```
+
+### 配置`vite.config.ts`
+
+添加：
+
+```ts
+import { createSvg } from './src/icons/index'
+
+export default defineConfig({
+    plugins: [
+      vue(),
+      createSvg('./src/icons/svg/')
+     ]
+})
+```
+
+### 在main.ts中写入svg-icon 模板
+
+```ts
+import svgIcon from './icons/index.vue'
+
+app.component('svg-icon', svgIcon)
 
 ```
-yarn add @element-plus/icons-vue
-```
-

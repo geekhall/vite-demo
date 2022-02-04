@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite'
-import vitePluginImp from "vite-plugin-imp"; // ++
+// import vitePluginImp from "vite-plugin-imp"; // ++
 
 // yarn add unplugin-icons
 import Icons from 'unplugin-icons/vite'
@@ -12,6 +12,8 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import ElementPlus from 'unplugin-element-plus/vite'
 
 import vue from '@vitejs/plugin-vue'
+
+import { createSvg } from './src/icons/index'
 
 import { viteMockServe } from 'vite-plugin-mock' //++
 import path from "path";
@@ -33,6 +35,7 @@ export default defineConfig({
     // https://github.com/antfu/vite-plugin-icons
     Icons(),
     ElementPlus({}),
+    createSvg('./src/icons/svg/'),
     styleImport({
       libs: [
         {
@@ -48,15 +51,20 @@ export default defineConfig({
         },
       ],
     }),
-    vitePluginImp({
-      libList: [
-        {
-          libName: "ant-design-vue",
-          // style: (name) => `ant-design-vue/es/${name}/style/css`, // 加载css
-          style: (name) => `ant-design-vue/es/${name}/style`, // 加载less
-        },
-      ],
-    }),
+    // vite-plutgin-imp 有下面的问题，暂时不使用
+    // [vite-plugin-imp] element-plus/es/components/button/style/css.js is not found!
+    // [vite-plugin-imp] If you think this is a bug, feel free to open an issue on https://github.com/onebay/vite-plugin-imp/issues
+    //
+    //
+    // vitePluginImp({
+    //   libList: [
+    //     {
+    //       libName: "ant-design-vue",
+    //       // style: (name) => `ant-design-vue/es/${name}/style/css`, // 加载css
+    //       style: (name) => `ant-design-vue/es/${name}/style`, // 加载less
+    //     },
+    //   ],
+    // }),
     viteMockServe({
       mockPath: "./src/mock",
       supportTs: true,
