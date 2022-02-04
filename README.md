@@ -857,7 +857,29 @@ npm run prepare
 `commit-msg`文件中添加：
 
 ```
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
 npx --no-install commitlint --edit
 ```
 
 husky就配置完成了
+
+这时使用`git commit -m "新功能"`提交会报错：
+```
+✖   subject may not be empty [subject-empty]
+✖   type may not be empty [type-empty]
+```
+
+使用：`git commit -m "feat: 新功能"` 提交就会成功。
+
+
+在`package.json` 中添加如下配置：
+```json
+"lint-staged": {
+    "src/**/*.{ts,js,vue}" : [ // src 目录下的所有js，ts和vue文件
+      "eslint --fix",          // 自动修复
+      "git add"                // 自动提交时修复
+    ]
+  }
+```
