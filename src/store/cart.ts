@@ -51,6 +51,9 @@ export const useCartStore = defineStore('cart',{
         async checkout() {
             const ret = await buyProducts()
             this.checkoutStatus = ret ? '成功' : '失败'
+            if (ret) {
+                this.cartProducts = []
+            }
         }
     }
 })
