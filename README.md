@@ -883,3 +883,25 @@ husky就配置完成了
     ]
   }
 ```
+
+## 修改vetur snippets模板
+
+修改`user/.vscode/extensions/octref.vetur-0.35.0/server/dist/veturSnippets`下的`default.vue`
+
+```ts
+<template>${0}</template>
+
+<script lang="ts" setup></script>
+
+<style lang="scss" scoped></style>
+```
+
+可以使用`<vue`执行新Vue文件的snippets。
+
+
+### 添加Elementplus icon
+
+```
+yarn add @element-plus/icons-vue
+```
+

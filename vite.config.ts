@@ -7,11 +7,27 @@ import vue from '@vitejs/plugin-vue'
 
 import { viteMockServe } from 'vite-plugin-mock' //++
 import path from "path";
+import styleImport from "vite-plugin-style-import";
 const resolve = (dir: string) => path.join(__dirname, dir);
 
 export default defineConfig({
   plugins: [
     vue(),
+    styleImport({
+      libs: [
+        {
+          libraryName: "element-plus",
+          esModule: true,
+          ensureStyleFile: true,
+          resolveStyle: name => {
+            return `element-plus/lib/theme-chalk/${name}.css`;
+          },
+          resolveComponent: name => {
+            return `element-plus/lib/${name}`;
+          },
+        },
+      ],
+    }),
     vitePluginImp({
       libList: [
         {
