@@ -1,12 +1,9 @@
 <template>
-    <div>
-        <h1>Home Page.</h1>
-    </div>
+  <div>
+    <h1>Home Page.</h1>
+  </div>
 </template>
 
-<script lang="ts">
+<script lang="ts"></script>
 
-</script>
-
-<style lang="less" scoped>
-</style>
+<style lang="less" scoped></style>

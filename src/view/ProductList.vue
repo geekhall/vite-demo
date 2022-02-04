@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts" setup>
-import {useCartStore}  from '../store/cart'
+import {useCartStore}  from '../store/cart';
 import { useProductsStore } from '../store/products'
 
 const productsStore = useProductsStore()

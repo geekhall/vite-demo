@@ -718,3 +718,43 @@ export default [
 ```
 
 使用postman或者浏览器访问：http://localhost:3000/api/getList，即可看到返回结果
+
+
+
+### 安装并使用ESLint和Prettier
+
+```bash
+# 安装eslint
+sudo npm install -g eslint
+
+# 初始化（生成.eslintrc.js文件）
+eslint --init
+
+# 安装Prettier
+yarn add prettier -D
+
+```
+
+找到一个`.vue`文件，点击鼠标右键，选择`使用...格式化文档`，配置默认格式化程序，
+选择Prettier。
+
+工程下新建`.prettierrc`文件，输入如下内容：
+```json
+{
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "none"
+}
+```
+
+在`.eslintrc.js`文件的`rules`中添加如下内容，解决同Prettier规则冲突问题
+```json
+idnent: 0,
+'space-before-function-paren': 0
+```
+
+### 解决VSCode中`.vue`后缀的文件爆红问题
+
+Code => 首选项 => 设置 => 搜索vetur，将下面的三个选项勾选掉即可：
+
+![](https://gitee.com/geekhall/pic/raw/main/img/20220204134200.png)
