@@ -901,7 +901,11 @@ husky就配置完成了
 
 ### 添加Elementplus icon
 
-```
+```bash
+# 添加Elementplus icon
 yarn add @element-plus/icons-vue
+# 安装 vite-plugin-style-import
+yarn add vite-plugin-style-import
 ```
+
 
