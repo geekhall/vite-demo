@@ -1,8 +1,8 @@
 import { request } from "../request";
 
-export function getList() {
+export function getUser() {
     return request({
-        url: `/getList`,
+        url: `/getUser`,
         method: 'get',
         data: {},
         params: {}

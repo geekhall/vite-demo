@@ -3,7 +3,7 @@ import type { App } from "vue";
 
 // 导入对应的模块
 const Home = () => import("../view/Home.vue");
-const Login = () => import("../view/login/index.vue");
+const Login = () => import("../view/login/Index.vue");
 const ElementTest = () => import("../view/ElementTest.vue");
 const AntTest = () => import("../view/AntTest.vue");
 const AxiosTest = () => import("../view/AxiosTest.vue");

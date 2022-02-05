@@ -1,7 +1,7 @@
 import { MockMethod } from 'vite-plugin-mock'
 export default [
   {
-    url: '/api/getList',
+    url: '/api/getUser',
     method: 'get',
     response: () => {
       return {
@@ -12,7 +12,7 @@ export default [
     }
   },
   {
-    url: '/api/getList',
+    url: '/api/getUser',
     method: 'post',
     response: () => {
       return {

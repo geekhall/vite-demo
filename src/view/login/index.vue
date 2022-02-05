@@ -24,10 +24,14 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { login } from '../../api/'
+import { useUserStore } from '../../store/user'
+// import { login } from '../../api/'
+import { userLogin } from '../../api/user'
 import { Edit } from '@element-plus/icons-vue'
 // import SvgIcon from '../../components/SvgIcon/index.vue'
 import svgIcon from '../../icons/index.vue'
+import { defineComponent } from 'vue'
+import { getUser } from '../../service/api/user'
 
 const form = ref({
   username: '',
@@ -52,15 +56,17 @@ const rules = ref({
 })
 
 const formRef = ref(null)
-const handleLogin = () => {
-  console.log(formRef.value)
+const userStore = useUserStore()
+const handleLogin = async () => {
+  console.log('handleLogin called')
   formRef.value.validate((valid) => {
-    if (valid) {
-      alert('submit')
-    } else {
+    if (!valid) {
       console.log('error submit!')
       return false
     }
+  })
+  await getUser().then((res: any) => {
+    console.log(res.data)
   })
 }
 </script>
