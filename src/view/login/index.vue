@@ -24,6 +24,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+import { login } from '../../api/'
 import { Edit } from '@element-plus/icons-vue'
 // import SvgIcon from '../../components/SvgIcon/index.vue'
 import svgIcon from '../../icons/index.vue'

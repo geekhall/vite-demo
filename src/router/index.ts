@@ -14,7 +14,7 @@ const V3Demo = () => import("../view/V3Demo.vue");
 const V3Demo1 = () => import("../view/V3Demo1.vue");
 const V3Demo2 = () => import("../view/V3Demo2.vue");
 const V3Demo3 = () => import("../view/V3Demo3.vue");
-const CartDemo = () => import("../view/ShoppingCartApp.vue");
+const CartDemo = () => import("../view/cart-demo/ShoppingCartApp.vue");
 
 // 写路由
 const routes = [

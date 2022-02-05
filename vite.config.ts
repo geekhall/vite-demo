@@ -15,6 +15,7 @@ import vue from '@vitejs/plugin-vue'
 
 import { createSvg } from './src/icons/index'
 
+// Mock config
 import { viteMockServe } from 'vite-plugin-mock' //++
 import path from "path";
 import styleImport from "vite-plugin-style-import";
