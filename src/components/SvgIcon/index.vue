@@ -1,3 +1,4 @@
+<!-- js+webpack的写法，废止 -->
 <template>
   <svg class="svg-icon" aria-hidden="true">
     <use :xlink:href="icon"></use>

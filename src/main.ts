@@ -35,6 +35,7 @@ setupRouter(app);     // 装载Router
 setupElem(app);       // 装载ElementUI
 setupAntd(app);       // 装载AntDesignVue
 app.use(pinia)        // 挂载Pinia到app
+
 // app.use(Antd);
 
 router.isReady().then(() => {

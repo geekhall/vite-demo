@@ -10,5 +10,16 @@ export default [
           data: ['tom', 'jerry']
       };
     }
-  }
+  },
+  {
+    url: '/api/getList',
+    method: 'post',
+    response: () => {
+      return {
+          code: 200,
+          message: 'ok',
+          data: ['eric', 'king']
+      };
+    }
+  },
 ] as MockMethod[]

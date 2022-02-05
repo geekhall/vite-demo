@@ -27,7 +27,8 @@ const svgClass = computed(() => {
 .svg-icon {
   width: 1em;
   height: 1em;
-  fill: currentColor;
   vertical-align: middle;
+  fill: currentColor;
+  overflow: hidden;
 }
 </style>

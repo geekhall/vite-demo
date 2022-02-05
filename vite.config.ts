@@ -66,8 +66,8 @@ export default defineConfig({
     //   ],
     // }),
     viteMockServe({
-      mockPath: "./src/mock",
-      supportTs: true,
+      mockPath: "./src/mock", // mock 文件地址
+      supportTs: true,        // 支持TS，打开后将无法监视js
     }), // MockJS
     // ...
     AutoImport({
