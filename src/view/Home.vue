@@ -70,9 +70,22 @@
             /></el-icon>
             <template #dropdown>
               <el-dropdown-menu>
-                <el-dropdown-item>View</el-dropdown-item>
-                <el-dropdown-item>Add</el-dropdown-item>
-                <el-dropdown-item>Delete</el-dropdown-item>
+                <el-dropdown-item>
+                  <router-link to="/user/1/dashboard"> Dashboard </router-link>
+                </el-dropdown-item>
+                <el-dropdown-item>
+                  <router-link
+                    :to="{ name: 'UserProfile', params: { id: '2' } }"
+                    >Profile</router-link
+                  >
+                </el-dropdown-item>
+                <el-dropdown-item>
+                  <router-link
+                    :to="{ name: 'UserSetting', params: { id: '3' } }"
+                    >Setting</router-link
+                  >
+                </el-dropdown-item>
+                <el-dropdown-item>Exit</el-dropdown-item>
               </el-dropdown-menu>
             </template>
           </el-dropdown>

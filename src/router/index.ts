@@ -25,7 +25,7 @@ const UserSetting = () => import("../view/UserSetting.vue");
 const routes = [
   {
     path: "/",
-    name: "home",
+    name: "Home",
     component: Home,
   },
   { path: "/login", component: Login },
@@ -36,24 +36,28 @@ const routes = [
       // 当 /user/:id/profile 匹配成功
       // UserProfile 将被渲染到 User 的 <router-view> 内部
       path: 'profile',
+      name: 'UserProfile',
       component: UserProfile,
     },
     {
       // 当 /user/:id/posts 匹配成功
       // UserPosts 将被渲染到 User 的 <router-view> 内部
       path: 'posts',
+      name: 'UserPosts',
       component: UserPosts,
     },
     {
       // 当 /user/:id/dashboard 匹配成功
       // UserDashboard 将被渲染到 User 的 <router-view> 内部
       path: 'dashboard',
+      name: 'UserDashboard',
       component: UserDashboard,
     },
     {
       // 当 /user/:id/setting 匹配成功
       // UserSetting 将被渲染到 User 的 <router-view> 内部
       path: 'setting',
+      name: 'UserSetting',
       component: UserSetting,
     },
   ]

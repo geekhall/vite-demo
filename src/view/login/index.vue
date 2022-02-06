@@ -61,17 +61,19 @@ const formRef = ref(null)
 const userStore = useUserStore()
 const handleLogin = async () => {
   console.log('handleLogin called')
-  formRef.value.validate((valid) => {
+  formRef.value.validate(async (valid) => {
     if (valid) {
       console.log('login success')
-      this.$router.push('/home')
+      await getUser().then((res: any) => {
+        console.log(res.data)
+        router.push({
+          name: 'Home'
+        })
+      })
     } else {
       warningMsg('用户名和密码不能为空')
       return false
     }
-  })
-  await getUser().then((res: any) => {
-    console.log(res.data)
   })
 }
 </script>
