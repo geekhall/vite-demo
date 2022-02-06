@@ -15,11 +15,49 @@ const V3Demo1 = () => import("../view/V3Demo1.vue");
 const V3Demo2 = () => import("../view/V3Demo2.vue");
 const V3Demo3 = () => import("../view/V3Demo3.vue");
 const CartDemo = () => import("../view/cart-demo/ShoppingCartApp.vue");
+const User = () => import("../view/User.vue");
+const UserProfile = () => import("../view/UserProfile.vue");
+const UserPosts = () => import("../view/UserPosts.vue");
+const UserDashboard = () => import("../view/UserDashboard.vue");
+const UserSetting = () => import("../view/UserSetting.vue");
 
 // 写路由
 const routes = [
-  { path: "/", component: Home },
+  {
+    path: "/",
+    name: "home",
+    component: Home,
+  },
   { path: "/login", component: Login },
+  { path: '/user/:id',
+  component: User,
+  children: [
+    {
+      // 当 /user/:id/profile 匹配成功
+      // UserProfile 将被渲染到 User 的 <router-view> 内部
+      path: 'profile',
+      component: UserProfile,
+    },
+    {
+      // 当 /user/:id/posts 匹配成功
+      // UserPosts 将被渲染到 User 的 <router-view> 内部
+      path: 'posts',
+      component: UserPosts,
+    },
+    {
+      // 当 /user/:id/dashboard 匹配成功
+      // UserDashboard 将被渲染到 User 的 <router-view> 内部
+      path: 'dashboard',
+      component: UserDashboard,
+    },
+    {
+      // 当 /user/:id/setting 匹配成功
+      // UserSetting 将被渲染到 User 的 <router-view> 内部
+      path: 'setting',
+      component: UserSetting,
+    },
+  ]
+  },
   { path: "/element-test", component: ElementTest },
   { path: "/ant-test", component: AntTest },
   { path: "/axios-test", component: AxiosTest },
