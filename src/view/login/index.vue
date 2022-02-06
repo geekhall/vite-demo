@@ -32,6 +32,8 @@ import { Edit } from '@element-plus/icons-vue'
 import svgIcon from '../../icons/index.vue'
 import { defineComponent } from 'vue'
 import { getUser } from '../../service/api/user'
+import router from '../../router'
+import { successMsg, warningMsg } from '../../utils/message'
 
 const form = ref({
   username: '',
@@ -60,8 +62,11 @@ const userStore = useUserStore()
 const handleLogin = async () => {
   console.log('handleLogin called')
   formRef.value.validate((valid) => {
-    if (!valid) {
-      console.log('error submit!')
+    if (valid) {
+      console.log('login success')
+      this.$router.push('/home')
+    } else {
+      warningMsg('用户名和密码不能为空')
       return false
     }
   })
