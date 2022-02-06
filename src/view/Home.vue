@@ -89,7 +89,7 @@
               </el-dropdown-menu>
             </template>
           </el-dropdown>
-          <span>Tom</span>
+          <span>{{ $route.params.name }}</span>
         </div>
       </el-header>
 

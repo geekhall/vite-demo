@@ -20,7 +20,7 @@ const UserProfile = () => import("../view/UserProfile.vue");
 const UserPosts = () => import("../view/UserPosts.vue");
 const UserDashboard = () => import("../view/UserDashboard.vue");
 const UserSetting = () => import("../view/UserSetting.vue");
-
+const LoginSample1 = () => import("../view/login/Sample.vue");
 // 写路由
 const routes = [
   {
@@ -29,6 +29,7 @@ const routes = [
     component: Home,
   },
   { path: "/login", component: Login },
+  { path: "/loginsample1", component: LoginSample1 },
   { path: '/user/:id',
   component: User,
   children: [

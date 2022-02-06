@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, reactive, unref } from 'vue'
 import { useUserStore } from '../../store/user'
 // import { login } from '../../api/'
 import { userLogin } from '../../api/user'
@@ -67,7 +67,8 @@ const handleLogin = async () => {
       await getUser().then((res: any) => {
         console.log(res.data)
         router.push({
-          name: 'Home'
+          name: 'Home',
+          params: { name: formRef.value }
         })
       })
     } else {
