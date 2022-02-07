@@ -756,23 +756,44 @@ plugins: [
 
 ```typescript
 import { MockMethod } from 'vite-plugin-mock'
+import * as fs from 'fs'
+
+const appData = JSON.parse(fs.readFileSync('./src/mock/data.json', 'utf8'))
+const seller = appData.seller
+const goods = appData.goods
+const ratings = appData.ratings
+
 export default [
   {
-    url: '/api/getList',
+    url: '/api/getUser',
     method: 'get',
     response: () => {
       return {
           code: 200,
           message: 'ok',
           data: ['tom', 'jerry']
-      }
+      };
     }
   },
+  // ...
+  {
+    // http://localhost:3000/api/seller
+    url: '/api/seller',
+    method: 'get',
+    response: () => {
+      return {
+          code: 200,
+          message: 'ok',
+          data: seller
+      };
+    }
+  }
 ] as MockMethod[]
 ```
 
 使用postman或者浏览器访问：http://localhost:3000/api/getList，即可看到返回结果
 
+可以安装Chrome插件[JSONVue](https://chrome.google.com/webstore/detail/jsonvue/chklaanhfefbnpoihckbnefhakgolnmc/related)来美化返回的JSON结果
 
 
 ## 安装并使用ESLint和Prettier
