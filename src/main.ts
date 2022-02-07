@@ -20,6 +20,7 @@ import { setupAntd } from "./libs/antdv";  // ++
 import App from "./App.vue";
 import 'ant-design-vue/dist/antd.css';
 import './assets/css/global.css';
+import './assets/css/normalize.css';
 import './assets/css/index.scss';
 import { createPinia } from 'pinia'
 import svgIcon from './icons/index.vue'
