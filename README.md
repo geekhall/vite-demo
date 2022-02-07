@@ -1,17 +1,8 @@
 # Vue 3 + Typescript + Vite
 
 _Read this in other languages:_
-[_English_](README.en-US.md)
-
-This template should help get you started developing with Vue 3 and Typescript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
-
-## Recommended IDE Setup
-
-- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
-
-## Type Support For `.vue` Imports in TS
-
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's `.vue` type support plugin by running `Volar: Switch TS Plugin on/off` from VSCode command palette.
+[_English_](README.en-US.md),
+[_日本語_](README.ja-JP.md)
 
 ## 创建工程
 
@@ -76,7 +67,7 @@ yarn add @types/node --save-dev
 
 ## 清理默认生成的工程
 
-新建`public/css/reset.css`，添加如下内容，并在main.ts添加`import '../public/css/reset.css'`引入：
+新建`src/assets/css/reset.css`，添加如下内容，并在main.ts添加`import './assets/css/reset.css';`引入：
 ```css
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
