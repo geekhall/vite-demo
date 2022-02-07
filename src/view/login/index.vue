@@ -1,6 +1,11 @@
 <template>
   <div class="login-container">
-    <el-form ref="formRef" :model="form" class="login-form" :rules="rules">
+    <el-form
+      :model="formModel"
+      :rules="rules"
+      ref="nullFormModel"
+      class="login-form"
+    >
       <div class="title-container">
         <h3 class="title">用户登录</h3>
       </div>
@@ -8,74 +13,96 @@
         <!-- <el-icon :size="20" class="svg-container">
           <edit />
         </el-icon> -->
-        <svg-icon name="user" color="gray" class="svg-container" />
-        <el-input v-model="form.username"></el-input>
+        <!-- <svg-icon name="user" color="gray" class="svg-container" /> -->
+        <el-input v-model="formModel.username"></el-input>
       </el-form-item>
       <el-form-item prop="password">
-        <svg-icon name="password" color="gray" class="svg-container" />
-        <el-input v-model="form.password"></el-input>
+        <!-- <svg-icon name="password" color="gray" class="svg-container" /> -->
+        <el-input v-model="formModel.password"></el-input>
       </el-form-item>
-      <el-button type="primary" class="login-button" @click="handleLogin"
-        >登录</el-button
-      >
+      <el-form-item>
+        <el-button type="primary" class="login-button" @click="handleLogin"
+          >登录</el-button
+        >
+      </el-form-item>
     </el-form>
   </div>
 </template>
 
-<script lang="ts" setup>
-import { ref, reactive, unref } from 'vue'
-import { useUserStore } from '../../store/user'
+<script lang="ts">
+import { reactive, ref, unref } from 'vue'
+// import { useUserStore } from '../../store/user'
 // import { login } from '../../api/'
-import { userLogin } from '../../api/user'
-import { Edit } from '@element-plus/icons-vue'
+// import { userLogin } from '../../api/user'
+// import { Edit } from '@element-plus/icons-vue'
 // import SvgIcon from '../../components/SvgIcon/index.vue'
-import svgIcon from '../../icons/index.vue'
-import { defineComponent } from 'vue'
-import { getUser } from '../../service/api/user'
-import router from '../../router'
-import { successMsg, warningMsg } from '../../utils/message'
+// import svgIcon from '../../icons/index.vue'
+// import { defineComponent } from 'vue'
+// import { getUser } from '../../service/api/user'
+// import router from '../../router'
+// import { successMsg, warningMsg } from '../../utils/message'
 
-const form = ref({
-  username: '',
-  password: ''
-})
+export default {
+  setup(props) {
+    const nullFormModel = ref(null)
+    const formModel = reactive({
+      username: '',
+      password: ''
+    })
+    const rules = {
+      username: [
+        {
+          required: true,
+          message: '请输入用户名',
+          trigger: 'blur'
+        }
+      ],
+      password: [
+        {
+          required: true,
+          message: '请输入密码',
+          trigger: 'blur'
+        }
+      ]
+    }
 
-const rules = ref({
-  username: [
-    {
-      required: true,
-      message: '请输入用户名',
-      trigger: 'blur'
-    }
-  ],
-  password: [
-    {
-      required: true,
-      message: '请输入密码',
-      trigger: 'blur'
-    }
-  ]
-})
+    // const userStore = useUserStore()
+    const handleLogin = async () => {
+      const form = unref(nullFormModel)
+      if (!form) return
 
-const formRef = ref(null)
-const userStore = useUserStore()
-const handleLogin = async () => {
-  console.log('handleLogin called')
-  formRef.value.validate(async (valid) => {
-    if (valid) {
-      console.log('login success')
-      await getUser().then((res: any) => {
-        console.log(res.data)
-        router.push({
-          name: 'Home',
-          params: { name: formRef.value }
-        })
-      })
-    } else {
-      warningMsg('用户名和密码不能为空')
-      return false
+      // console.log('handleLogin called')
+      try {
+        await form.validate()
+        const { username, password } = formModel
+        console.log(username, password)
+      } catch (error) {
+        console.log(error.message)
+      }
     }
-  })
+    return {
+      formModel,
+      rules,
+      handleLogin,
+      nullFormModel
+    }
+  }
+
+  // formRef.value.validate(async (valid) => {
+  //   if (valid) {
+  //     console.log('login success')
+  //     await getUser().then((res: any) => {
+  //       console.log(res.data)
+  //       router.push({
+  //         name: 'Home',
+  //         params: { name: formRef.value }
+  //       })
+  //     })
+  //   } else {
+  //     warningMsg('用户名和密码不能为空')
+  //     return false
+  //   }
+  // })
 }
 </script>
 

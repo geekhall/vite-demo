@@ -1,10 +1,11 @@
 <template>
-  <div class="box">
+  <div class="login-container">
     <el-form
       :model="ruleForm"
       :rules="rules"
       ref="ruleFormsss"
       label-width="100px"
+      class="login-form"
     >
       <el-form-item label="用户" prop="username">
         <el-input v-model="ruleForm.username"></el-input>
@@ -64,13 +65,25 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
-.box {
-  width: 600px;
+<style lang="scss" scoped>
+$bg: #2d3a4b;
+$dark_gray: #889aa4;
+$light_gray: #eee;
+$cursor: #fff;
+
+.login-container {
+  min-height: 100%;
+  width: 100%;
   height: 300px;
-  padding: 5rem 3em;
-  background-color: azure;
-  margin: 0 auto;
+  background-color: $bg;
   overflow: hidden;
+  .login-form {
+    position: relative;
+    width: 520px;
+    max-width: 100%;
+    padding: 160px 35px 0;
+    margin: 0 auto;
+    overflow: hidden;
+  }
 }
 </style>

@@ -4,6 +4,7 @@ import type { App } from "vue";
 // 导入对应的模块
 const Home = () => import("../view/Home.vue");
 const Login = () => import("../view/login/Index.vue");
+const LoginSample1 = () => import("../view/login/Sample.vue");
 const ElementTest = () => import("../view/ElementTest.vue");
 const AntTest = () => import("../view/AntTest.vue");
 const AxiosTest = () => import("../view/AxiosTest.vue");
@@ -20,7 +21,6 @@ const UserProfile = () => import("../view/UserProfile.vue");
 const UserPosts = () => import("../view/UserPosts.vue");
 const UserDashboard = () => import("../view/UserDashboard.vue");
 const UserSetting = () => import("../view/UserSetting.vue");
-const LoginSample1 = () => import("../view/login/Sample.vue");
 // 写路由
 const routes = [
   {
