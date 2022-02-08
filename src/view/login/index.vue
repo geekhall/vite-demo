@@ -34,7 +34,7 @@
         ></el-input>
         <img
           class="captcha-container"
-          src="http://localhost:3000/api/account/img_captcha/"
+          :src="captchaUrl"
           @click="updateCaptcha"
         />
       </el-form-item>
@@ -61,12 +61,16 @@ import { defineComponent } from 'vue'
 import { getUser } from '../../service/api/user'
 import router from '../../router'
 import { successMsg, warningMsg } from '../../utils/message'
+import axios from 'axios'
 
 export default {
   setup(props) {
+    // const data = reactive({
+    //   captchaURL: ''
+    // })
     // http://localhost:8000/account/img_captcha/
-    let captchaUrl = ''
-    let checked = true
+    let captchaUrl = '/api/account/img_captcha/'
+    let checked = false
     const nullFormModel = ref(null)
     const formModel = reactive({
       username: '',
@@ -98,7 +102,9 @@ export default {
     }
 
     const updateCaptcha = () => {
-      this.captchaUrl = '/api/account/img_captcha/'
+      captchaUrl = '/api/account/img_captcha?random=' + Math.random()
+      // captchaUrl = '/api/account/img_captcha?time=' + new Date()
+      console.log('image clicked' + captchaUrl)
     }
     // const userStore = useUserStore()
     const handleLogin = async () => {
@@ -120,7 +126,8 @@ export default {
       formModel,
       rules,
       handleLogin,
-      nullFormModel
+      nullFormModel,
+      updateCaptcha
     }
   }
 
