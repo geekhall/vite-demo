@@ -1013,3 +1013,35 @@ import svgIcon from './icons/index.vue'
 app.component('svg-icon', svgIcon)
 
 ```
+
+## 配置代理解决跨域问题
+
+本地开发环境通过代理实现跨域，生产环境使用 nginx 转发
+
+正则表达式写法，这里是通过请求/api 来转发到 http://localhost:8000/
+
+比如请求地址：`http://localhost:3000/api/account/img_captcha/`
+
+通过代理转发至后端的`http://localhost:8000/account/img_captcha/`
+
+`vite.config.ts`:
+
+```ts
+export default defineConfig({
+  plugins: [
+    vue(),
+    // ...
+  ],
+  server: {
+      port: '3000',
+      open: true, //自动打开
+      base: "./ ", //生产环境路径
+      proxy: {
+        '/api': {
+          target: 'http://localhost:8000', // 后端服务实际地址
+          changeOrigin: true, // 开启代理
+          rewrite: (path) => path.replace(/^\/api/, '')
+        }
+      }
+    }
+```

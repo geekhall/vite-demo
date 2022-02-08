@@ -13,13 +13,33 @@
         <!-- <el-icon :size="20" class="svg-container">
           <edit />
         </el-icon> -->
-        <!-- <svg-icon name="user" color="gray" class="svg-container" /> -->
-        <el-input v-model="formModel.username"></el-input>
+        <svg-icon name="user" color="gray" class="svg-container" />
+        <el-input
+          v-model="formModel.username"
+          placeholder="请输入用户名"
+        ></el-input>
       </el-form-item>
       <el-form-item prop="password">
-        <!-- <svg-icon name="password" color="gray" class="svg-container" /> -->
-        <el-input v-model="formModel.password"></el-input>
+        <svg-icon name="password" color="gray" class="svg-container" />
+        <el-input
+          v-model="formModel.password"
+          placeholder="请输入密码"
+        ></el-input>
       </el-form-item>
+      <el-form-item prop="captcha">
+        <el-input
+          v-model="formModel.captcha"
+          placeholder="请输入验证码"
+          style="width: 80%"
+        ></el-input>
+        <img
+          class="captcha-container"
+          src="http://localhost:3000/api/account/img_captcha/"
+          @click="updateCaptcha"
+        />
+      </el-form-item>
+
+      <el-checkbox v-model="checked">记住我</el-checkbox>
       <el-form-item>
         <el-button type="primary" class="login-button" @click="handleLogin"
           >登录</el-button
@@ -31,23 +51,27 @@
 
 <script lang="ts">
 import { reactive, ref, unref } from 'vue'
-// import { useUserStore } from '../../store/user'
-// import { login } from '../../api/'
-// import { userLogin } from '../../api/user'
-// import { Edit } from '@element-plus/icons-vue'
-// import SvgIcon from '../../components/SvgIcon/index.vue'
-// import svgIcon from '../../icons/index.vue'
-// import { defineComponent } from 'vue'
-// import { getUser } from '../../service/api/user'
-// import router from '../../router'
-// import { successMsg, warningMsg } from '../../utils/message'
+import { useUserStore } from '../../store/user'
+import { login } from '../../api/'
+import { userLogin } from '../../api/user'
+import { Edit } from '@element-plus/icons-vue'
+import SvgIcon from '../../components/SvgIcon/index.vue'
+import svgIcon from '../../icons/index.vue'
+import { defineComponent } from 'vue'
+import { getUser } from '../../service/api/user'
+import router from '../../router'
+import { successMsg, warningMsg } from '../../utils/message'
 
 export default {
   setup(props) {
+    // http://localhost:8000/account/img_captcha/
+    let captchaUrl = ''
+    let checked = true
     const nullFormModel = ref(null)
     const formModel = reactive({
       username: '',
-      password: ''
+      password: '',
+      captcha: ''
     })
     const rules = {
       username: [
@@ -63,9 +87,19 @@ export default {
           message: '请输入密码',
           trigger: 'blur'
         }
+      ],
+      captcha: [
+        {
+          required: true,
+          message: '请输入验证码',
+          trigger: 'blur'
+        }
       ]
     }
 
+    const updateCaptcha = () => {
+      this.captchaUrl = '/api/account/img_captcha/'
+    }
     // const userStore = useUserStore()
     const handleLogin = async () => {
       const form = unref(nullFormModel)
@@ -74,13 +108,15 @@ export default {
       // console.log('handleLogin called')
       try {
         await form.validate()
-        const { username, password } = formModel
-        console.log(username, password)
+        const { username, password, captcha } = formModel
+        console.log(username, password, captcha)
       } catch (error) {
         console.log(error.message)
       }
     }
     return {
+      checked,
+      captchaUrl,
       formModel,
       rules,
       handleLogin,
@@ -121,11 +157,16 @@ $cursor: #fff;
   .login-form {
     position: relative;
     width: 520px;
+    min-width: 300px;
     max-width: 100%;
     padding: 160px 35px 0;
     margin: 0 auto;
     overflow: hidden;
 
+    .el-form-item__content {
+      display: flex;
+      align-items: center;
+    }
     :deep(.el-form-item) {
       border: 1px solid rgba(255, 255, 255, 0.1);
       background: rgba(0, 0, 0, 0.1);

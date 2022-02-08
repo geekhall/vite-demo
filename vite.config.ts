@@ -17,9 +17,9 @@ import { createSvg } from './src/icons/index'
 
 // Mock config
 import { viteMockServe } from 'vite-plugin-mock' //++
-import path from "path";
-import styleImport from "vite-plugin-style-import";
-const resolve = (dir: string) => path.join(__dirname, dir);
+import path from 'path'
+import styleImport from 'vite-plugin-style-import'
+const resolve = (dir: string) => path.join(__dirname, dir)
 
 export default defineConfig({
   plugins: [
@@ -30,7 +30,7 @@ export default defineConfig({
         // auto import icons
         // https://github.com/antfu/vite-plugin-icons
         IconsResolver({}),
-	      ElementPlusResolver()
+        ElementPlusResolver()
       ]
     }),
     // https://github.com/antfu/vite-plugin-icons
@@ -40,17 +40,17 @@ export default defineConfig({
     styleImport({
       libs: [
         {
-          libraryName: "element-plus",
+          libraryName: 'element-plus',
           esModule: true,
           ensureStyleFile: true,
-          resolveStyle: name => {
-            return `element-plus/lib/theme-chalk/${name}.css`;
+          resolveStyle: (name) => {
+            return `element-plus/lib/theme-chalk/${name}.css`
           },
-          resolveComponent: name => {
-            return `element-plus/lib/${name}`;
-          },
-        },
-      ],
+          resolveComponent: (name) => {
+            return `element-plus/lib/${name}`
+          }
+        }
+      ]
     }),
     // vite-plutgin-imp 有下面的问题，暂时不使用
     // [vite-plugin-imp] element-plus/es/components/button/style/css.js is not found!
@@ -67,30 +67,57 @@ export default defineConfig({
     //   ],
     // }),
     viteMockServe({
-      mockPath: "./src/mock", // mock 文件地址
-      supportTs: true,        // 支持TS，打开后将无法监视js
+      mockPath: './src/mock', // mock 文件地址
+      supportTs: true // 支持TS，打开后将无法监视js
     }), // MockJS
     // ...
     AutoImport({
-      resolvers: [ElementPlusResolver()],
+      resolvers: [ElementPlusResolver()]
     }),
     Components({
-      resolvers: [ElementPlusResolver()],
-    }),],
-    css: {
-      preprocessorOptions: {
-        less: {
-          // 自定义定制主题
-          modifyVars: { "primary-color": "#1188ff" },
-          javascriptEnabled: true,
-        },
-      },
-    },
+      resolvers: [ElementPlusResolver()]
+    })
+  ],
+  css: {
+    preprocessorOptions: {
+      less: {
+        // 自定义定制主题
+        modifyVars: { 'primary-color': '#1188ff' },
+        javascriptEnabled: true
+      }
+    }
+  },
   resolve: {
     alias: {
-      "@/": resolve("src/*"),
-      comps: resolve("src/components"),
-      store: resolve("src/store"),
-    },
+      '@/': resolve('src/*'),
+      comps: resolve('src/components'),
+      store: resolve('src/store')
+    }
   },
+  server: {
+    port: '3000',
+    open: true, //自动打开
+    base: './ ', //生产环境路径
+    proxy: {
+      // 本地开发环境通过代理实现跨域，生产环境使用 nginx 转发
+      // 正则表达式写法
+      //这里是通过请求/api 来转发到 https://api.pingping6.com/
+      //假如你要请求https://api.*.com/a/a
+      //那么axios的url，可以配置为 /api/a/a
+
+      // http://localhost:3000/api/account/img_captcha/
+      // ↓
+      // http://localhost:8000/api/account/img_captcha/
+      // '/api': 'http://localhost:8000/'
+
+      // http://localhost:3000/api/account/img_captcha/
+      // ↓
+      // http://localhost:8000/account/img_captcha/
+      '/api': {
+        target: 'http://localhost:8000', // 后端服务实际地址
+        changeOrigin: true, //开启代理
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
+  }
 })
