@@ -7,7 +7,7 @@ _Read this in other languages:_
 ## 创建工程
 
 ```bash
-npm init vite vite-demo -- --template vue-ts
+npm init vite vite-demo --template vue-ts
 # or
 yarn create vite vite-demo --template vue-ts
 ```
