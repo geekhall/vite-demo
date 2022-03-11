@@ -13,7 +13,7 @@ export function getUser() {
 // call spring boot 2 api
 export function hello() {
   return request({
-    url: '/hello',
+    url: '/product/2',
     method: 'get',
     data: {},
     params: {}
