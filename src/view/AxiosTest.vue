@@ -1,6 +1,7 @@
 <template>
   <el-button @click="test">测试</el-button>
   <el-button @click="test2">Test Spring Boot 2 </el-button>
+  <el-button @click="test3">Test Spring Boot 3 </el-button>
 
   <el-card class="box-card">
     <template #header>
@@ -34,13 +35,26 @@ export default defineComponent({
           console.log(res.data)
         })
         .catch((err: any) => {
-          console.log(err)
+          console.log(err.message)
         })
       // await hello().then((res: any) => {
       //   console.log(res.data)
       // })
     }
-    return { test, test2 }
+    // 自己public文件夹下已经有的内容，代理服务器不会转发至后台。
+    const test3 = async () => {
+      const result = await axios({
+        method: 'GET',
+        url: '/test.txt'
+      })
+        .then((res: any) => {
+          console.log(res.data)
+        })
+        .catch((err: any) => {
+          console.log(err.message)
+        })
+    }
+    return { test, test2, test3 }
   }
 })
 </script>

@@ -119,7 +119,8 @@ export default defineConfig({
       // http://localhost:8000/account/img_captcha/
       '/api': {
         target: 'http://localhost:8888', // 后端服务实际地址
-        changeOrigin: true, //开启代理
+        changeOrigin: true, // 开启代理换源功能，服务器端接收到的请求源为localhost:8888
+        // ws: true,        // 支持websocket
         rewrite: (path) => path.replace(/^\/api/, '')
       }
     }
