@@ -3,7 +3,7 @@
   <el-button @click="test2">Test Spring Boot 2 </el-button>
   <el-button @click="test3">Test Spring Boot 3 </el-button>
 
-  <el-card class="box-card">
+  <el-card shadow="hover" class="box-card">
     <template #header>
       <div class="card-header">
         <span>{{ card_name }}</span>
