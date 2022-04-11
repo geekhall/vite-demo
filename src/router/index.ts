@@ -25,8 +25,8 @@ const UserSetting = () => import("../view/UserSetting.vue");
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: Home,
+    name: "Login",
+    component: Login,
   },
   { path: "/login", component: Login },
   { path: "/loginsample1", component: LoginSample1 },
