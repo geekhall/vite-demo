@@ -90,6 +90,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@/': resolve('src/*'),
+      '~': path.resolve(__dirname, 'src'),
       comps: resolve('src/components'),
       store: resolve('src/store')
     }
