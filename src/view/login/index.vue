@@ -64,7 +64,7 @@ import { successMsg, warningMsg } from '../../utils/message'
 import axios from 'axios'
 
 export default {
-  setup(props) {
+  setup() {
     // const data = reactive({
     //   captchaURL: ''
     // })
