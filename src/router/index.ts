@@ -17,6 +17,7 @@ const V3Demo2 = () => import("../view/V3Demo2.vue");
 const V3Demo3 = () => import("../view/V3Demo3.vue");
 const CartDemo = () => import("../view/cart-demo/ShoppingCartApp.vue");
 const User = () => import("../view/User.vue");
+const Minesweeper = () => import("../view/Minesweeper.vue");
 const UserProfile = () => import("../view/UserProfile.vue");
 const UserPosts = () => import("../view/UserPosts.vue");
 const UserDashboard = () => import("../view/UserDashboard.vue");
@@ -64,6 +65,7 @@ const routes = [
   ]
   },
   { path: "/element-test", component: ElementTest },
+  { path: "/minesweeper", component: Minesweeper },
   { path: "/ant-test", component: AntTest },
   { path: "/axios-test", component: AxiosTest },
   { path: "/header", component: Header },

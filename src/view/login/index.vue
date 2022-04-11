@@ -116,7 +116,7 @@ export default {
         await form.validate()
         const { username, password, captcha } = formModel
         console.log(username, password, captcha)
-      } catch (error) {
+      } catch (error: any) {
         console.log(error.message)
       }
     }
