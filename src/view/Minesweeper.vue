@@ -85,6 +85,7 @@ function updateNumbers() {
       })
     })
   })
+
   // for (const row of state) {
   //   for (const block of row) {
   //     if (block.mine) {

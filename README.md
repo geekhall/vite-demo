@@ -1045,3 +1045,19 @@ export default defineConfig({
       }
     }
 ```
+
+
+安装degit、ni、unocss
+
+```bash
+npm i -D unocss
+sudo npm i -g @antfu/ni
+sudo npm i -g degit
+```
+
+安装iconify中的某个icon
+
+```bash
+ni -D @iconify-json/mdi
+```
+
